@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Gradle Imported" enabled="true">
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.16/lombok-1.18.16.jar" />
+        </processorPath>
+        <module name="code-gradle.gradle-hello.test" />
+        <module name="code-gradle.main" />
+        <module name="code-gradle.calcite.calcite-mock.test" />
+        <module name="code-gradle.test" />
+        <module name="code-gradle.gradle-hello.main" />
+        <module name="code-gradle.calcite.calcite-mock.main" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8" />
+  </component>
+</project>
