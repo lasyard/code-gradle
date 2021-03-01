@@ -7,6 +7,7 @@
 # Java Files
 *.class
 *.jar
+!gradle-wrapper.jar
 
 # Maven Files
 target/
