@@ -16,19 +16,16 @@
 
 package io.github.lasyard.code.calcite.mock;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.calcite.schema.Schema;
-import org.apache.calcite.schema.SchemaFactory;
-import org.apache.calcite.schema.SchemaPlus;
+import java.util.Locale;
+import javax.annotation.Nonnull;
 
-import java.util.Map;
+public enum TableFlavor {
+    SCANNABLE,
+    FILTERABLE,
+    PROJECTABLE_FILTERABLE,
+    TRANSLATABLE;
 
-@Slf4j
-public class MockSchemaFactory implements SchemaFactory {
-    @Override
-    public Schema create(SchemaPlus schemaPlus, String name, Map<String, Object> operand) {
-        log.info("schemaPlus = {}, name = {}, map = {}", schemaPlus, name, operand);
-        TableFlavor flavor = TableFlavor.of((String) operand.get("flavor"));
-        return new MockSchema(flavor);
+    public static TableFlavor of(@Nonnull String value) {
+        return TableFlavor.valueOf(value.toUpperCase(Locale.ROOT));
     }
 }

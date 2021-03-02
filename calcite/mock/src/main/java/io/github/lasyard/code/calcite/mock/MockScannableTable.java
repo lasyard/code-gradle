@@ -17,18 +17,22 @@
 package io.github.lasyard.code.calcite.mock;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.calcite.schema.Schema;
-import org.apache.calcite.schema.SchemaFactory;
-import org.apache.calcite.schema.SchemaPlus;
-
-import java.util.Map;
+import org.apache.calcite.DataContext;
+import org.apache.calcite.linq4j.AbstractEnumerable;
+import org.apache.calcite.linq4j.Enumerable;
+import org.apache.calcite.linq4j.Enumerator;
+import org.apache.calcite.schema.ScannableTable;
 
 @Slf4j
-public class MockSchemaFactory implements SchemaFactory {
+public class MockScannableTable extends MockTable implements ScannableTable {
     @Override
-    public Schema create(SchemaPlus schemaPlus, String name, Map<String, Object> operand) {
-        log.info("schemaPlus = {}, name = {}, map = {}", schemaPlus, name, operand);
-        TableFlavor flavor = TableFlavor.of((String) operand.get("flavor"));
-        return new MockSchema(flavor);
+    public Enumerable<Object[]> scan(DataContext dataContext) {
+        log.info("scan() called.");
+        return new AbstractEnumerable<Object[]>() {
+            @Override
+            public Enumerator<Object[]> enumerator() {
+                return new MockEnumerator();
+            }
+        };
     }
 }

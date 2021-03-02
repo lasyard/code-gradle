@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package io.github.lasyard.code.calcite.mock;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.calcite.schema.Schema;
-import org.apache.calcite.schema.SchemaFactory;
-import org.apache.calcite.schema.SchemaPlus;
+public final class Helper {
+    private Helper() {
+    }
 
-import java.util.Map;
-
-@Slf4j
-public class MockSchemaFactory implements SchemaFactory {
-    @Override
-    public Schema create(SchemaPlus schemaPlus, String name, Map<String, Object> operand) {
-        log.info("schemaPlus = {}, name = {}, map = {}", schemaPlus, name, operand);
-        TableFlavor flavor = TableFlavor.of((String) operand.get("flavor"));
-        return new MockSchema(flavor);
+    public static Connection getConnection(String modelFileName) throws ClassNotFoundException, SQLException {
+        Class.forName("org.apache.calcite.jdbc.Driver");
+        Properties props = new Properties();
+        props.put("model", MockScannableTableTest.class.getResource(modelFileName).getPath());
+        return DriverManager.getConnection("jdbc:calcite:", props);
     }
 }

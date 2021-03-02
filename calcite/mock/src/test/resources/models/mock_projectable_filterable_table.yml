@@ -6,4 +6,4 @@ schemas:
     type: 'custom'
     factory: 'io.github.lasyard.code.calcite.mock.MockSchemaFactory'
     operand:
-      op1: 'value1'
+      flavor: 'projectable_filterable'

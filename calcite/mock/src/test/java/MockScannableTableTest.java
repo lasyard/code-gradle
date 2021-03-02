@@ -29,25 +29,20 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-public class MockSchemaFactoryTest {
+public class MockScannableTableTest {
     private static Connection connection;
 
     @BeforeAll
     public static void setupAll() throws SQLException, ClassNotFoundException {
-        Class.forName("org.apache.calcite.jdbc.Driver");
-        Properties props = new Properties();
-        props.put("model", MockSchemaFactoryTest.class.getResource("/models/model.yml").getPath());
-        connection = DriverManager.getConnection("jdbc:calcite:", props);
+        connection = Helper.getConnection("/models/mock_scannable_table.yml");
     }
 
     @AfterAll
